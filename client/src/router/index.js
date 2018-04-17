@@ -3,6 +3,7 @@ import Router from "vue-router";
 import HelloWorld from "@/components/HelloWorld";
 import Courses from "@/components/Courses";
 import NewCourse from "@/components/NewCourse";
+import Course from "@/components/Course";
 
 Vue.use(Router);
 
@@ -23,6 +24,11 @@ export default new Router({
       path: "/courses/new",
       name: "NewCourse",
       component: NewCourse
+    },
+    {
+      path: "/course/:course_urlfriendly_display_name",
+      name: "Course",
+      component: Course
     }
   ]
 });

@@ -35,11 +35,17 @@ app.get("/courses", (req, res) => {
 // Add new course
 app.post("/courses", (req, res) => {
   var db = req.db;
+  
   var title = req.body.title;
   var description = req.body.description;
+  var hidden = req.body.hidden,
+  var images = req.body.images
+
   var new_course = new Course({
     title: title,
-    description: description
+    description: description,
+    hidden: hidden,
+    images: images
   });
 
   new_course.save(function(error) {
