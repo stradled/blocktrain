@@ -8,6 +8,9 @@
         <div>
           <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
         </div>
+        <div class="addcourse_images">
+          <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
+        </div>
         <div>
           <button class="app_course_btn" @click="addCourse">Add</button>
         </div>
@@ -22,14 +25,17 @@ export default {
   data() {
     return {
       title: "",
-      description: ""
+      description: "",
+      videos: [],
+      images: []
     };
   },
   methods: {
     async addCourse() {
       await CoursesService.addCourse({
         title: this.title,
-        description: this.description
+        description: this.description,
+
       });
       this.$router.push({ name: "Course" });
     }

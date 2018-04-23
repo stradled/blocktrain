@@ -22,7 +22,7 @@ var Course = require("../models/course");
 
 // Fetch all courses
 app.get("/courses", (req, res) => {
-  Course.find({}, "title description", function(error, courses) {
+  Course.find({}, "title description hidden images videos", function(error, courses) {
     if (error) {
       console.error(error);
     }
@@ -35,28 +35,40 @@ app.get("/courses", (req, res) => {
 // Add new course
 app.post("/courses", (req, res) => {
   var db = req.db;
-  
+  debugger;
   var title = req.body.title;
   var description = req.body.description;
-  var hidden = req.body.hidden,
-  var images = req.body.images
+  var course_urlfriendly_display_name = req.body.course_urlfriendly_display_name;
+  var hidden = req.body.hidden;
+  var images = req.body.images;
+  var videos = req.body.videos;
 
   var new_course = new Course({
     title: title,
     description: description,
     hidden: hidden,
-    images: images
+    images: images,
+    videos: videos
   });
 
   new_course.save(function(error) {
     if (error) {
       console.log(error);
     }
-    calendres.send({
+    res.send({
       success: true,
       message: "Course saved successfully!"
     });
   });
 });
+
+// Get Single Course
+app.get('/course/:id', (req, res) => {
+	var db = req.db;
+	Course.findById(req.params.id, 'title description hidden images videos', function (error, post) {
+	  if (error) { console.error(error); }
+	  res.send(post)
+	})
+})
 
 app.listen(process.env.PORT || 8081);

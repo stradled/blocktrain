@@ -1,6 +1,10 @@
 import Vue from "vue";
 import Router from "vue-router";
+
+// Home
 import HelloWorld from "@/components/HelloWorld";
+
+// Courses
 import Courses from "@/components/Courses";
 import NewCourse from "@/components/NewCourse";
 import Course from "@/components/Course";
@@ -26,9 +30,14 @@ export default new Router({
       component: NewCourse
     },
     {
-      path: "/course/:course_urlfriendly_display_name",
+      path: "/course/:id",
       name: "Course",
       component: Course
     }
+    // {
+    //   path: "/course/:course_urlfriendly_display_name",
+    //   name: "Course",
+    //   component: Course
+    // }
   ]
 });

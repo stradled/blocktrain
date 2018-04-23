@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var CourseSchema = new Schema({
   title: String,
   description: String,
+  course_urlfriendly_display_name: String,
   hidden: Boolean,
   images: [{
     url: String,

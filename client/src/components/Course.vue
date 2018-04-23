@@ -1,7 +1,9 @@
 <template>
   <div class="course">
-    <h1>Single Course</h1>
-    <p>This is a course, need to get the data passed in</p>
+    <h1>{{title}}</h1>
+    <p>{{description}}</p>
+    <p> Number of videos : {{videos.length}}</p>
+    <p> Number of images : {{images.length}}</p>
   </div>
 </template>
 
@@ -12,16 +14,24 @@ export default {
   name: "courses",
   data() {
     return {
-      courses: []
+      title: '',
+      description: '',
+      videos: [],
+      images: []
     };
   },
   mounted() {
-    this.getCourses();
+    this.getCourse();
   },
   methods: {
-    async getCourses() {
-      const response = await CoursesService.fetchCourses();
-      this.courses = response.data;
+    async getCourse () {
+      const response = await CoursesService.getCourse({
+        id: this.$route.params.id
+      });
+      this.title = response.data.title
+      this.description = response.data.description
+      this.videos = response.data.videos
+      this.images = response.data.images
     }
   }
 };
